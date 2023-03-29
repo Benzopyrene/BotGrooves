@@ -1,0 +1,20 @@
+{
+  "name": "botgrooves",
+  "version": "1.0.0",
+  "description": "The custom bot for the ZackGrooves Discord server!",
+  "main": "src/index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node src/index.js",
+    "depcom": "node src/utils/deploy-commands.js",
+    "nm": "nodemon src/index.js"
+  },
+  "author": "Benzopyrene#0334",
+  "license": "ISC",
+  "dependencies": {
+    "discord.js": "^14.8.0"
+  },
+  "devDependencies": {
+    "nodemon": "^2.0.22"
+  }
+}
