@@ -1,0 +1,16 @@
+{
+    "author": {
+        "name": "Benzopyrene",
+        "id": "678999954198495324"
+    },
+    "devIds": ["678999954198495324", "585982119508049977"],
+    "whitelistedGuilds": ["838606384895492096", "838925518644576266"],
+
+    "defaultCooldown": 750,
+    "chatXPCooldown": 500,
+
+    "channelIds": {
+        "errorChannel": "0",
+        "logsChannel": "0"
+    }
+}
