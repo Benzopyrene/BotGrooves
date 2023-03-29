@@ -3,6 +3,8 @@ const fs = require('fs');
 
 // Require the necessary discord.js classes
 const { Client, Collection, Events, GatewayIntentBits } = require('discord.js');
+const mongoose = require('mongoose'); 
+
 const { token, databaseToken } = require('../config.json');
 const chalk = require('chalk');
 
@@ -43,3 +45,9 @@ client.handleComponents();
 
 // Login to Discord with your client's token
 client.login(token).then(console.log(chalk.yellowBright("Client has logged in...")));
+
+// Connect to the MongoDB Database using the Database Token
+(async () => {
+	mongoose.set('strictQuery', true);
+	await mongoose.connect(databaseToken).catch(console.error);
+})();

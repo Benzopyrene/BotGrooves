@@ -1,5 +1,5 @@
 const fs = require('fs');
-// const { connection } = require('mongoose');
+const { connection } = require('mongoose');
 
 module.exports = (client) => {
     client.handleEvents = async () => { // Defines the new function we call in index.js
@@ -22,16 +22,16 @@ module.exports = (client) => {
                     break;
                 
 
-                // case 'mongo': // MongoDB events
-                //     for (const file of eventFiles) {
-                //         const event = require(`../../events/${folder}/${file}`);
+                case 'mongo': // MongoDB events
+                    for (const file of eventFiles) {
+                        const event = require(`../../events/${folder}/${file}`);
 
-                //         if (event.once) { // Very similar to above (but not exactly the same)
-                //             connection.once(event.name, (...args) => event.execute(...args, client));
-                //         } else {
-                //             connection.on(event.name, (...args) => event.execute(...args, client));
-                //         }
-                //     }
+                        if (event.once) { // Very similar to above (but not exactly the same)
+                            connection.once(event.name, (...args) => event.execute(...args, client));
+                        } else {
+                            connection.on(event.name, (...args) => event.execute(...args, client));
+                        }
+                    }
                 default:
                     break;
             }
