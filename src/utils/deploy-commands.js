@@ -9,7 +9,7 @@ let commandsFolders
 
 const guildCommand = true; // Toggle to prevent dev commands going global
 
-if (guildId == '1090678203334529075' && guildCommand) { // GoodBot Dev server (deliberately hardcoded)
+if (guildId == '1090678203334529075' && guildCommand) { // Dev server (deliberately hardcoded)
 	commandsFolders = fs.readdirSync(`./src/commands`); // All command folders & files
 } else { // Every other server
 	commandsFolders = fs.readdirSync(`./src/commands`).filter(folder => !folder.match('!dev')); // Only the non-dev files get refreshed
