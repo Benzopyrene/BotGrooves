@@ -22,7 +22,7 @@ client.buttons = new Collection();
 client.stringSelectMenus = new Collection();
 client.triggers = new Collection();
 client.data = new Collection(); // Set of Global Variables
-client.color = 0xFE7474 // For embeds
+client.color = 0xf68282 // For embeds
 
 
 
