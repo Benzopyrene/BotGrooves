@@ -8,7 +8,7 @@ module.exports = {
 	once: true,
 	async execute(client) {
 		client.user.setStatus('online');
-		client.user.setActivity('/help | https://youtube.com/@ZackGrooves', { type: ActivityType['Playing'] });
+		client.user.setActivity('/help', { type: ActivityType['Playing'] });
 
 		console.log(chalk.bgGreenBright.bold(` ${client.user.tag} is online and ready! (Host: ${host}) `));
 	}

@@ -1,9 +1,10 @@
-// Most of the initial setup is from the Discord.js guide lol
+// Most of the initial setup is from the discord.js guide lol
 const fs = require('fs');
 
 // Require the necessary discord.js classes
 const { Client, Collection, Events, GatewayIntentBits } = require('discord.js');
 const { token, databaseToken } = require('../config.json');
+const chalk = require('chalk');
 
 // Create a new client instance
 const client = new Client({ 
@@ -21,7 +22,7 @@ client.buttons = new Collection();
 client.stringSelectMenus = new Collection();
 client.triggers = new Collection();
 client.data = new Collection(); // Set of Global Variables
-client.color = 0xffdd00 // For embeds
+client.color = 0xFE7474 // For embeds
 
 
 
