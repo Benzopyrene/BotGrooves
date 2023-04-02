@@ -10,7 +10,7 @@
     "chatXPCooldown": 500,
 
     "channelIds": {
-        "errorChannel": "0",
-        "logsChannel": "0"
+        "errorChannel": "1092197621147381862",
+        "logsChannel": "1092197621147381862"
     }
 }

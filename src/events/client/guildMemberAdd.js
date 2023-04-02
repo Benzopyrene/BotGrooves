@@ -2,13 +2,19 @@ module.exports = {
 	name: 'guildMemberAdd',
 	execute: async(member, client) => {
 
-		if (member.guild.id == '1090678203334529075') { // Dev server
+		if (member.guild.id == '838606384895492096') { // Main server
 
-			const welcomeChannel = client.channels.cache.get('1092194769079386272');
-			console.log(member);
-			welcomeChannel.send({
-				content: `${member.user.username} has joined the vibe`
-			}); // member.user.id   member.user._roles   member.user.bot
+			// const welcomeChannel = client.channels.cache.get('838631101698015252'); // Currently #welcome
+
+			// // Welcome message
+			// await welcomeChannel.send({
+			// 	content: `${member.user.username} has joined the vibe`
+			// }); 
+
+			// // Welcome DM
+			// member.user.send({
+			// 	content: 'Welcome to the vibe my homie, enjoy your stay, and keep those booties movin\''
+			// });
 		}
 	},
 };
