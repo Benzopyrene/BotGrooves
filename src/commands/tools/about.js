@@ -1,4 +1,4 @@
-const { SlashCommandBuilder } = require('discord.js');
+const { SlashCommandBuilder, hyperlink } = require('discord.js');
 const { version } = require('../../../package.json');
 const { host } = require('../../../config.json')
 const botInfo = require('../../../botInfo.json');
@@ -24,7 +24,7 @@ module.exports = {
             fields: [
                 {
                     name: '🔃 Version',
-                    value: `BotGrooves v${version} - Made with Discord.JS v14 💖`
+                    value: `BotGrooves v${version} - Made with Discord.JS v14 💖 \nAll the code is available on the ${hyperlink('GitHub', 'https://github.com/Benzopyrene/BotGrooves')}`
                 },
                 {
                     name: '📰 Author',
