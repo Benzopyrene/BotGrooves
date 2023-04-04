@@ -6,7 +6,9 @@
     "devIds": ["678999954198495324", "0"],
     "whitelistedGuilds": ["838606384895492096", "838925518644576266"],
 
-    "defaultCooldown": 750,
+    "defaultCooldowns": {
+        "commands": 750
+    },
 
     "channelIds": {
         "errorChannel": "1092197621147381862",

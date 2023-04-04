@@ -1,11 +1,9 @@
 const botInfo = require('../../../botInfo.json');
-
+const ms = require('ms');
 
 module.exports = {
 	name: 'interactionCreate',
 	async execute(interaction) {
-
-		// Functions that were previously here are now in src/functions/tools/ and are now global
 
 		// Command interactions
 		if (interaction.isChatInputCommand()) {
@@ -16,10 +14,24 @@ module.exports = {
 				return;
 			}
 
+
+			// Cooldowns!
+			const cooldownData = `${interaction.user.id}/${interaction.commandName}`;
+
+			if (interaction.client.cooldowns.has(cooldownData)) {
+				const timeUntil = ms(interaction.client.cooldowns.get(cooldownData) - Date.now(), { long: true });
+
+				return await interaction.reply({
+					content: `You are on cooldown! Please wait ${timeUntil} before using this command again`,
+					ephemeral: true
+				})
+			}
+			await interaction.client.setCooldown(cooldownData, command.cooldown || botInfo.defaultCooldowns.commands)
+
+
+			// Doing the command code
 			try {
-				await command.execute(interaction); // Does the command code
-
-
+				await command.execute(interaction); // Actually does the command code
 			} catch (error) { // Error with the command
 				await interaction.client.errorWithCodeResponse('command', error, interaction);
 			}
