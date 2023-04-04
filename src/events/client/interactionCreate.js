@@ -1,7 +1,5 @@
 const botInfo = require('../../../botInfo.json');
 
-// Cooldowns
-const commandCooldown = new Set();
 
 module.exports = {
 	name: 'interactionCreate',
@@ -19,18 +17,7 @@ module.exports = {
 			}
 
 			try {
-				if (commandCooldown.has(interaction.user.id)) {
-					await interaction.reply({
-						content: `You are on cooldown! Please wait ${(command.cooldown / 1000) || (botInfo.defaultCooldown / 1000)}s before using this command again`,
-						ephemeral: true
-					})
-				} else {
-					await command.execute(interaction); // Does the command code
-					commandCooldown.add(interaction.user.id);
-					setTimeout(() => {
-						commandCooldown.delete(interaction.user.id)
-					}, command.cooldown || botInfo.defaultCooldown)
-				}
+				await command.execute(interaction); // Does the command code
 
 
 			} catch (error) { // Error with the command
