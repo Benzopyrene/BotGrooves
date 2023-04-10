@@ -7,7 +7,8 @@
     "whitelistedGuilds": ["838606384895492096", "838925518644576266"],
 
     "defaultCooldowns": {
-        "commands": 750
+        "commands": 1000,
+        "triggers": 500
     },
 
     "channelIds": {

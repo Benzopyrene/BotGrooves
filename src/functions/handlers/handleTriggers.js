@@ -1,4 +1,6 @@
 const fs = require('fs');
+const ms = require('ms');
+const botInfo = require('../../../botInfo.json');
 
 module.exports = (client) => {
     client.handleTriggers = async(message, isHuman) => { // Makes sure the trigger files can use message.propertyHere
@@ -12,9 +14,25 @@ module.exports = (client) => {
 
                 // Set a new item in the Collection with the key as the trigger name and the value as the exported module
 	            if ('name' in trigger && 'execute' in trigger) { // Checks for a name, execute property
-                    if (trigger.isHuman == isHuman) { // Human check is here so it doesn't trigger the else statement
-                        client.triggers.set(trigger.name, trigger);
-                        trigger.execute(message, client);
+                    if (trigger.isHuman == isHuman && (message.content === trigger.filter || trigger.allMessages) ) { 
+
+
+                        // Cooldowns!
+                        const cooldownData = `${message.author.id}/trigger/${trigger.name}`;
+
+            
+                        if (!client.cooldowns.has(cooldownData)) {
+                            if (trigger.name !== 'chatCoins') {
+                                await client.setCooldown(cooldownData, trigger.cooldown || botInfo.defaultCooldowns.triggers);
+                            }
+                            client.triggers.set(trigger.name, trigger);
+                            trigger.execute(message, client).then();
+                        } else {
+                            console.log(`On cooldown for ${trigger.name} (${ms(client.cooldowns.get(`${message.author.id}/trigger/${trigger.name}`) - Date.now())} left)`)
+                        }
+
+                        
+                        
                     }
 	            } else {
 		            console.log(`[WARNING] The trigger at ${filePath} is missing a required "name" or "execute" property.`);
