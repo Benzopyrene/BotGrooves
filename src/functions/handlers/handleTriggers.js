@@ -19,16 +19,16 @@ module.exports = (client) => {
 
                         // Cooldowns!
                         const cooldownData = `${message.author.id}/trigger/${trigger.name}`;
+                        if (!client.cooldowns.has(cooldownData)) { // If not on cooldown
 
-            
-                        if (!client.cooldowns.has(cooldownData)) {
-                            if (trigger.name !== 'chatCoins') {
+                            if (trigger.name !== 'chatCoins') { // Any actual trigger
                                 await client.setCooldown(cooldownData, trigger.cooldown || botInfo.defaultCooldowns.triggers);
                             }
+
                             client.triggers.set(trigger.name, trigger);
-                            trigger.execute(message, client).then();
+                            trigger.execute(message, client).then(); // chatCoins has its own special cooldown (configurable since the cd is stored on MongoDB)
                         } else {
-                            console.log(`On cooldown for ${trigger.name} (${ms(client.cooldowns.get(`${message.author.id}/trigger/${trigger.name}`) - Date.now())} left)`)
+                            return;
                         }
 
                         
