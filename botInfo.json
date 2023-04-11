@@ -7,7 +7,7 @@
     "whitelistedGuilds": ["838606384895492096", "838925518644576266"],
 
     "defaultCooldowns": {
-        "commands": 1000,
+        "commands": 1500,
         "triggers": 500
     },
 
