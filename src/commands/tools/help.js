@@ -9,7 +9,7 @@ module.exports = {
 
 	async execute(interaction) {
 		const bhelpEmbed = {
-            title: "GrooveBot Info and Commands",
+            title: "BotGrooves Info and Commands",
             description: description,
             color: interaction.client.color,
             fields: [
