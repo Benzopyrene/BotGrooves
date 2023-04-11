@@ -26,9 +26,9 @@ module.exports = (client) => {
                             }
 
                             client.triggers.set(trigger.name, trigger);
-                            trigger.execute(message, client).then(); // chatCoins has its own special cooldown (configurable since the cd is stored on MongoDB)
+                            trigger.execute(message, client); // chatCoins has its own special cooldown (configurable since the cd is stored on MongoDB)
                         } else {
-                            return;
+                            // There was a return; here but it was causing problems lol
                         }
 
                         
