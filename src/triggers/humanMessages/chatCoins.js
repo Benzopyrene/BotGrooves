@@ -1,5 +1,5 @@
 const Balance = require('../../schemas/balance');
-const botInfo = require('../../../botInfo.json');
+const Stats = require('../../schemas/stats');
 const { chatCoinsServerId } = require('../../../config.json');
 const GuildConfig = require('../../schemas/guildConfig');
 const mongoose = require('mongoose');
@@ -14,7 +14,9 @@ module.exports = {
 
         if (message.guild.id == chatCoinsServerId) {
 
-            const storedBalance = await client.fetchBalance(message.author.id) // Creates Balance if none already made
+            // const storedBalance = await client.fetchBalance(message.author.id); // Creates Balance if none already made
+            // const storedStats = await client.fetchStats(message.author.id); // Now I am just using { upsert: true }
+
             let guildConfigFile = await GuildConfig.findOne({ guildId: message.guild.id });
             if (!guildConfigFile) {
                 guildConfigFile = new GuildConfig({
@@ -42,10 +44,19 @@ module.exports = {
                 }
             }
 
+            const amount = Math.round(multi > 0 ? multi * baseChatCoins : baseChatCoins);
+
             await Balance.findOneAndUpdate(
                 { userId: message.author.id },
-                { balance: storedBalance.balance + Math.round(multi > 0 ? multi * baseChatCoins : baseChatCoins) }
+                { $inc: { balance: amount } },
+                { upsert: true }
             );
+
+            await Stats.findOneAndUpdate(
+                { userId: message.author.id },
+                { $inc: { chatCoins: amount } },
+                { upsert: true }
+            )
             
             await client.setCooldown(`${message.author.id}/trigger/chatCoins`, guildConfigFile.chatCoinsCooldown); // 5s - Overwrites the default cooldown to be the guildConfig one
             
