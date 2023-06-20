@@ -4,7 +4,7 @@ const { version, description } = require('../../../package.json')
 module.exports = {
 	data: new SlashCommandBuilder()
 		.setName('help')
-		.setDescription('GrooveBot help - commands and info'),
+		.setDescription('BotGrooves help - commands and info'),
 
 
 	async execute(interaction) {
